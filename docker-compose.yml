@@ -1,0 +1,36 @@
+services:
+  server:
+    container_name: code-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: runner
+    volumes:
+      - ./server/src:/app/src  # Only mount source files
+      - ./server/dist:/app/dist  # Mount the dist folder
+      - /app/node_modules  #
+    networks:
+      - Code
+    ports:
+      - "3000:3000"
+
+  client:
+    container_name: code-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: runner
+    volumes:
+      - ./client/dist:/app/dist  # Mount only the dist folder
+      - /app/node_modules  
+    command: ["npx", "serve", "-s", "dist", "-l", "5173"]
+    networks:
+      - Code
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+
+networks:
+  Code:
+    driver: bridge
