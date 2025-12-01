@@ -1,4 +1,4 @@
-#**Challenging Problem that I solved in this Project:**
+<span style="font-size:24px;">**Challenging Problem that I solved in this Project:**</span>
 
 🚩## **Problem**
 Multiple users typing at the same time caused editor conflicts, race conditions, and cursor misalignment in the collaborative editor, making real-time synchronization unreliable.
